@@ -1,23 +1,32 @@
-import logo from './logo.svg';
 import './App.css';
 
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+// import SiteData from './components/SiteData';
+import SitesMap from './components/SitesMap';
+
+const url = 'http://localhost:9000/iv';
+
 function App() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      const response = await axios.get(url);
+      console.log('>>> data', response.data);
+      setData(response.data);
+    }
+    fetchData();
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {/* <ul>
+        {data.map(item => (
+          <SiteData key={item.name} data={item} units={item.variable.unit.unitCode} />
+        ))}
+      </ul> */}
+      <SitesMap data={data} />
     </div>
   );
 }
