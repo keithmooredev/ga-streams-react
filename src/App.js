@@ -21,11 +21,6 @@ function App() {
 
   return (
     <div className="App">
-      {/* <ul>
-        {data.map(item => (
-          <SiteData key={item.name} data={item} units={item.variable.unit.unitCode} />
-        ))}
-      </ul> */}
       <SitesMap data={data} />
     </div>
   );
